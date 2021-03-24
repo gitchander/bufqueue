@@ -42,7 +42,7 @@ func main() {
 	}
 	defer w.Close()
 
-	r := randutil.NewRandFromTime()
+	r := randutil.NewRandNow()
 	data := make([]byte, 0, 17000)
 	for i := 0; i < n; i++ {
 		data = data[:randutil.DataLen(r, data)]

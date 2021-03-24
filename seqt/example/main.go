@@ -28,12 +28,23 @@ func motivation() {
 }
 
 func simple() {
+	//tab := seqt.NewTable(seqt.DIGITS)
 	tab := seqt.NewTable(seqt.UPPER_LETTERS)
 	seq := new(seqt.Sequence)
-	for i := 0; i < 15; i++ {
+	n := fact(1) + fact(2) + fact(3) + fact(4) + 1
+	for i := 0; i < n; i++ {
 		seq.Next()
 		fmt.Println(tab.String(seq))
 	}
+}
+
+// n! - factorial
+func fact(n int) int {
+	d := 1
+	for i := 0; i < n; i++ {
+		d *= (i + 1)
+	}
+	return d
 }
 
 func exampleParse() {

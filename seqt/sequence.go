@@ -50,13 +50,6 @@ func normalIntSlice(a []int) []int {
 	return a
 }
 
-func max(x, y int) int {
-	if x > y {
-		return x
-	}
-	return y
-}
-
 func next(a []int) []int {
 	for i := 0; ; i++ {
 		if len(a) == i {
@@ -67,14 +60,18 @@ func next(a []int) []int {
 		if a[i] < len(a) {
 			break
 		}
-		a[i] = 0
+		//------------------------------------
+		//a[i] = 0
+		//------------------------------------
+		a[i] = i
+		//------------------------------------
 	}
 	return a
 }
 
 func value(a []int, table []byte) string {
 	n := len(a)
-	var data = make([]byte, n)
+	data := make([]byte, n)
 	for i := range data {
 		n--
 		data[i] = table[a[n]]

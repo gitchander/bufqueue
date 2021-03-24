@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"bufq"
+	"github.com/gitchander/bufqueue/bufq"
 )
 
 func main() {

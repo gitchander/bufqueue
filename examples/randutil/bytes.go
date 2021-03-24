@@ -17,8 +17,20 @@ func DataLen(r *rand.Rand, data []byte) int {
 	return x
 }
 
-func FillBytes(r *rand.Rand, data []byte) {
-	for i := range data {
-		data[i] = byte(r.Intn(256))
+func FillBytes(r *rand.Rand, bs []byte) {
+	const (
+		bitsPerByte    = 8
+		bytesPerUint32 = 4
+	)
+	var x uint32
+	var n int // number of random bytes
+	for i := range bs {
+		if n == 0 {
+			x = r.Uint32()
+			n = bytesPerUint32
+		}
+		bs[i] = byte(x)
+		x >>= bitsPerByte
+		n--
 	}
 }

@@ -69,7 +69,7 @@ func loopWriter(hashChan chan<- []byte, n int, fc bufq.FilesConfig) {
 	}
 	defer w.Close()
 
-	r := randutil.NewRandFromTime()
+	r := randutil.NewRandNow()
 	data := make([]byte, 0, 19000)
 	for i := 0; i < n; i++ {
 		data = data[:randutil.DataLen(r, data)]

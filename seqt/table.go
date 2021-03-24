@@ -1,6 +1,9 @@
 package seqt
 
-import "errors"
+import (
+	"errors"
+	"sort"
+)
 
 const (
 	DIGITS = 1 << iota
@@ -49,10 +52,20 @@ func NewTable(tag int) *Table {
 		shift += 'z' - 'a' + 1
 	}
 
+	sort.Sort(byteSlice(data))
+
 	t.data = data
 
 	return t
 }
+
+var _ sort.IntSlice
+
+type byteSlice []byte
+
+func (x byteSlice) Len() int           { return len(x) }
+func (x byteSlice) Less(i, j int) bool { return x[i] < x[j] }
+func (x byteSlice) Swap(i, j int)      { x[i], x[j] = x[j], x[i] }
 
 func (t *Table) parseIntSlice(s string) ([]int, error) {
 
@@ -106,16 +119,4 @@ func (t *Table) Parse(s string) (*Sequence, error) {
 
 func (t *Table) String(seq *Sequence) string {
 	return value(seq.a, t.data)
-}
-
-func byteIsDigit(b byte) bool {
-	return ('0' <= b) && (b <= '9')
-}
-
-func byteIsUpperLetter(b byte) bool {
-	return ('A' <= b) && (b <= 'Z')
-}
-
-func byteIsLowerLetter(b byte) bool {
-	return ('a' <= b) && (b <= 'z')
 }
